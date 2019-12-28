@@ -15,4 +15,13 @@ public class ShoppingCart {
 
         return items;
     }
+
+    public void addCart(String item) {
+
+        if (items.containsKey(item)) {
+            items.put(item, items.get(item) + 1);
+        } else {
+            items.put(item, 1);
+        }
+    }
 }
