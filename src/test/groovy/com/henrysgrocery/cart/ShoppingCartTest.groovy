@@ -1,6 +1,12 @@
 package com.henrysgrocery.cart
 
+import com.henrysgrocery.item.ItemType
 import spock.lang.Specification
+
+import static com.henrysgrocery.item.ItemType.APPLE
+import static com.henrysgrocery.item.ItemType.BREAD
+import static com.henrysgrocery.item.ItemType.MILK
+import static com.henrysgrocery.item.ItemType.SOAP
 
 
 class ShoppingCartTest extends Specification {
@@ -28,7 +34,7 @@ class ShoppingCartTest extends Specification {
     def "addItem - should add a new item in cart and get added item"() {
 
         given:
-        String item = "Milk"
+        ItemType item = MILK
 
         when:
         shoppingCart.addCart(item)
@@ -42,7 +48,7 @@ class ShoppingCartTest extends Specification {
     def "addItem - should add an existing item in cart and increase quantity of it "() {
 
         given:
-        String item = "Milk"
+        ItemType item = MILK
         shoppingCart.addCart(item)
 
         when:
@@ -54,7 +60,23 @@ class ShoppingCartTest extends Specification {
         items.get(item) == 2
     }
 
+    def "addItem - should add different items"() {
 
+        given:
+        shoppingCart.addCart(MILK)
+
+        when:
+        shoppingCart.addCart(BREAD)
+        shoppingCart.addCart(SOAP)
+        shoppingCart.addCart(APPLE)
+
+        then: "should get added items"
+        def items = shoppingCart.getItems()
+        items.containsKey(MILK)
+        items.containsKey(BREAD)
+        items.containsKey(SOAP)
+        items.containsKey(APPLE)
+    }
 
 
 }
