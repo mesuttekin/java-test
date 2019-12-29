@@ -53,8 +53,31 @@ public class ShoppingCart {
     private BigDecimal getItemCost(Map<Item, Integer> items, Map.Entry<Item, Integer> discountItem) {
         return discountItem.getKey().getCost()
                 .multiply(new BigDecimal(discountItem.getValue()))
-                .subtract(applyDiscount.getDiscount(items, discountItem, purchaseDate));
+                .subtract(getDiscount(items, discountItem));
     }
 
+    private BigDecimal getDiscount(Map<Item, Integer> items, Map.Entry<Item, Integer> discountItem) {
+        return applyDiscount.getDiscount(items, discountItem, purchaseDate);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append("[\n");
+        items.entrySet().forEach((item) ->{
+            sb.append("{");
+            sb.append("Name:").append(item.getKey().getName()).append(", ");
+            sb.append("Cost:").append(item.getKey().getCost()).append(", ");
+            sb.append("Quantity:").append(item.getValue()).append(", ");
+            sb.append("Discount:").append(getDiscount(items, item));
+            sb.append("}\n");
+        });
+
+        sb.append("]");
+        sb.append(">>TotalCost=").append(getTotal());
+        sb.append("\n");
+        return sb.toString();
+    }
 
 }
