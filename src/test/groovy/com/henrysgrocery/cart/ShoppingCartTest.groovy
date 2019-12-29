@@ -1,7 +1,10 @@
 package com.henrysgrocery.cart
 
+import com.henrysgrocery.discount.Discount
 import com.henrysgrocery.item.Item
 import spock.lang.Specification
+
+import java.time.LocalDate
 
 import static com.henrysgrocery.item.Item.APPLE
 import static com.henrysgrocery.item.Item.BREAD
@@ -14,16 +17,14 @@ class ShoppingCartTest extends Specification {
     ShoppingCart shoppingCart
 
     def setup() {
-        shoppingCart = new ShoppingCart()
+        def purchaseDate = LocalDate.now().plusDays(3)
+        shoppingCart = new ShoppingCart(new Discount(), purchaseDate)
     }
 
     def "getItems - should not throw any exception and return empty map"() {
 
-        given:
-        shoppingCart = new ShoppingCart()
-
         when:
-        Map<String, Integer> items = shoppingCart.getItems()
+        def items = shoppingCart.getItems()
 
         then: "should not throw an exception and return empty map"
         true
@@ -88,7 +89,7 @@ class ShoppingCartTest extends Specification {
         when:
         BigDecimal total = shoppingCart.getTotal()
 
-        then: "should get added items"
+        then: "should get total of items"
         total == BigDecimal.valueOf(2.75)
     }
 
@@ -97,8 +98,20 @@ class ShoppingCartTest extends Specification {
         when:
         BigDecimal total = shoppingCart.getTotal()
 
-        then: "should get added items"
+        then: "should get zero"
         total == BigDecimal.ZERO
+    }
+
+    def "getTotal - should get total of cost with 10 percentage  apple discount"() {
+
+        given: "two apples added to cart"
+        shoppingCart.addCart(APPLE,2)
+
+        when: "get total is called"
+        BigDecimal total = shoppingCart.getTotal()
+
+        then: "should get total of items with discount"
+        total == BigDecimal.valueOf(0.18)
     }
 
 
