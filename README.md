@@ -1,6 +1,23 @@
 # Java Exercise
+This is a simple exercise which is developed by Mesut Tekin.
 
-This is a simple exercise to allow you to demostrate your software engineering skillset. It's completly up to you how long you give yourself, stop when you're happy with the quality of your work, but we don't expect it to take too long.
+## Prerequisites
+    - Gradle
+    - JDK8
+    - An IDEA (Optional like IntelliJ etc)
+## How to run
+    - Clone the repo
+    - From Command Line
+        - cd into cloned directory
+        - Build the application with folowing command 
+            `./gradlew clean build`
+        - Run the application with folowing command 
+            `java -jar build/libs/henrys-grocery-1.0-SNAPSHOT.jar`
+    - Or from an IDEA   
+        - Open the project from an IDEA 
+        - Run Application main method
+        - In order to activate Apple discount please change purchaseDate in Application main method    
+    - Add items into shopping cart with following insruction 
 
 ## Instructions
   1. Please fork this repository and work on your fork.
