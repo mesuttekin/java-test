@@ -1,7 +1,6 @@
 package com.henrysgrocery.cart;
 
 import com.henrysgrocery.discount.ApplyDiscount;
-import com.henrysgrocery.discount.Discount;
 import com.henrysgrocery.item.Item;
 
 import java.math.BigDecimal;
@@ -65,7 +64,7 @@ public class ShoppingCart {
         final StringBuilder sb = new StringBuilder();
 
         sb.append("[\n");
-        items.entrySet().forEach((item) ->{
+        items.entrySet().forEach(item ->{
             sb.append("{");
             sb.append("Name:").append(item.getKey().getName()).append(", ");
             sb.append("Cost:").append(item.getKey().getCost()).append(", ");

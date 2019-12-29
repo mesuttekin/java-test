@@ -13,7 +13,7 @@ import static com.henrysgrocery.util.DateValidation.isDiscountValid;
 public class AppleDiscount implements Discount {
     private static final LocalDate VALIDATE_FROM = LocalDate.now().plusDays(3);
     private static final LocalDate VALIDATE_TO = LocalDate.now().plusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
-    private static BigDecimal DISCOUNT_FACTOR = BigDecimal.valueOf(0.10);
+    private static final BigDecimal DISCOUNT_FACTOR = BigDecimal.valueOf(0.10);
 
 
     @Override
