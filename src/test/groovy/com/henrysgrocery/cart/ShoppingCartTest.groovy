@@ -6,11 +6,7 @@ import spock.lang.Specification
 
 import java.time.LocalDate
 
-import static com.henrysgrocery.item.Item.APPLE
-import static com.henrysgrocery.item.Item.BREAD
-import static com.henrysgrocery.item.Item.MILK
-import static com.henrysgrocery.item.Item.SOAP
-
+import static com.henrysgrocery.item.Item.*
 
 class ShoppingCartTest extends Specification {
 
@@ -102,16 +98,41 @@ class ShoppingCartTest extends Specification {
         total == BigDecimal.ZERO
     }
 
-    def "getTotal - should get total of cost with 10 percentage  apple discount"() {
+    def "getTotal - should get total of cost with 10 percentage apple discount"() {
 
         given: "two apples added to cart"
-        shoppingCart.addCart(APPLE,2)
+        shoppingCart.addCart(APPLE, appleQuantity)
 
-        when: "get total is called"
+        expect:
         BigDecimal total = shoppingCart.getTotal()
+        total == expectedTotal
 
-        then: "should get total of items with discount"
-        total == BigDecimal.valueOf(0.18)
+        where:
+        appleQuantity | expectedTotal
+                1     |     0.09        // 0.01 discount
+                2     |     0.18        // 0.02 discount
+                3     |     0.27        // 0.03 discount
+
+    }
+
+    def "getTotal - should get total of cost with bread discount"() {
+
+        given: "two tins of soup and a loaf of bread"
+        shoppingCart.addCart(SOAP, soupQuantity)
+        shoppingCart.addCart(BREAD, breadQuantity)
+
+
+        expect:
+        def total = shoppingCart.getTotal()
+        total == expectedTotal
+
+        where:
+        soupQuantity    | breadQuantity | expectedTotal
+                4       |        1      |      3            // 0.40 discount
+                2       |        1      |      1.70         // 0.40 discount
+                1       |        1      |      1.45         // 0 discount
+                4       |        2      |      3.40         // 0.80 discount
+                8       |        1      |      5.6          // 0.40 discount
     }
 
 

@@ -42,19 +42,18 @@ public class ShoppingCart {
     public BigDecimal getTotal() {
 
         return items.entrySet()
-                        .stream()
-                        .map(this::getItemCost)
-                        .reduce(BigDecimal::add)
-                        .orElse(BigDecimal.ZERO);
+                .stream()
+                .map(item -> getItemCost(items, item))
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
 
     }
 
-    private BigDecimal getItemCost(Map.Entry<Item, Integer> item) {
-        return item.getKey().getCost()
-                .multiply(new BigDecimal(item.getValue()))
-                .subtract(discount.getDiscount(item, purchaseDate));
+    private BigDecimal getItemCost(Map<Item, Integer> items, Map.Entry<Item, Integer> discountItem) {
+        return discountItem.getKey().getCost()
+                .multiply(new BigDecimal(discountItem.getValue()))
+                .subtract(discount.getDiscount(items, discountItem, purchaseDate));
     }
-
 
 
 }
