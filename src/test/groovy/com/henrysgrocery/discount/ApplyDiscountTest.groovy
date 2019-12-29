@@ -21,7 +21,7 @@ class ApplyDiscountTest extends Specification {
 
         given:
         def purchaseDate = LocalDate.now().plusDays(3)
-        items.put(SOAP, 2)
+        items.put(SOUP, 2)
         items.put(item, quantity)
 
         expect:

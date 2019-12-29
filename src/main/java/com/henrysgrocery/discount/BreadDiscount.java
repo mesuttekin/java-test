@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 import static com.henrysgrocery.item.Item.BREAD;
-import static com.henrysgrocery.item.Item.SOAP;
+import static com.henrysgrocery.item.Item.SOUP;
 
 public class BreadDiscount implements Discount {
 
@@ -25,10 +25,10 @@ public class BreadDiscount implements Discount {
             return BigDecimal.ZERO;
         }
 
-        if (discountItem.getKey() == BREAD && items.containsKey(SOAP) && DateValidation.isDiscountValid(VALIDATE_FROM, VALIDATE_TO, purchaseDate)) {
+        if (discountItem.getKey() == BREAD && items.containsKey(SOUP) && DateValidation.isDiscountValid(VALIDATE_FROM, VALIDATE_TO, purchaseDate)) {
 
             return discountItem.getKey().getCost()
-                    .multiply(BigDecimal.valueOf(Integer.min(items.get(BREAD), items.get(SOAP) / SOUP_QUANTITY_FOR_DISCOUNT)))
+                    .multiply(BigDecimal.valueOf(Integer.min(items.get(BREAD), items.get(SOUP) / SOUP_QUANTITY_FOR_DISCOUNT)))
                     .divide(DISCOUNT_FACTOR);
         }
 

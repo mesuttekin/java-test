@@ -63,21 +63,21 @@ class ShoppingCartTest extends Specification {
 
         when:
         shoppingCart.addCart(BREAD)
-        shoppingCart.addCart(SOAP)
+        shoppingCart.addCart(SOUP)
         shoppingCart.addCart(APPLE)
 
         then: "should get added items"
         def items = shoppingCart.getItems()
         items.containsKey(MILK)
         items.containsKey(BREAD)
-        items.containsKey(SOAP)
+        items.containsKey(SOUP)
         items.containsKey(APPLE)
     }
 
     def "getTotal - should get total of cost"() {
 
-        given: "a tin of soap, a loaf of bread, a bottle of milk and 2 apples"
-        shoppingCart.addCart(SOAP)
+        given: "a tin of soup, a loaf of bread, a bottle of milk and 2 apples"
+        shoppingCart.addCart(SOUP)
         shoppingCart.addCart(BREAD)
         shoppingCart.addCart(MILK)
 
@@ -117,7 +117,7 @@ class ShoppingCartTest extends Specification {
     def "getTotal - should get total of cost with bread discount"() {
 
         given: "two tins of soup and a loaf of bread"
-        shoppingCart.addCart(SOAP, soupQuantity)
+        shoppingCart.addCart(SOUP, soupQuantity)
         shoppingCart.addCart(BREAD, breadQuantity)
 
 

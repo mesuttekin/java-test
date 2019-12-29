@@ -6,7 +6,7 @@ import spock.lang.Specification
 import java.time.LocalDate
 
 import static com.henrysgrocery.item.Item.BREAD
-import static com.henrysgrocery.item.Item.SOAP
+import static com.henrysgrocery.item.Item.SOUP
 
 
 class BreadDiscountTest extends Specification {
@@ -23,7 +23,7 @@ class BreadDiscountTest extends Specification {
 
         given:
         def purchaseDate = LocalDate.now().plusDays(3)
-        items.put(SOAP, soupQuantity)
+        items.put(SOUP, soupQuantity)
         items.put(BREAD, breadQuantity)
 
 
@@ -44,7 +44,7 @@ class BreadDiscountTest extends Specification {
 
         given:
         def purchaseDate = LocalDate.now().minusDays(2)
-        items.put(SOAP, 2)
+        items.put(SOUP, 2)
         items.put(BREAD, 1)
 
 
