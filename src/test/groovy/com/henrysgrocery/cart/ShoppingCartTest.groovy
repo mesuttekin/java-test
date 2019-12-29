@@ -1,12 +1,12 @@
 package com.henrysgrocery.cart
 
-import com.henrysgrocery.item.ItemType
+import com.henrysgrocery.item.Item
 import spock.lang.Specification
 
-import static com.henrysgrocery.item.ItemType.APPLE
-import static com.henrysgrocery.item.ItemType.BREAD
-import static com.henrysgrocery.item.ItemType.MILK
-import static com.henrysgrocery.item.ItemType.SOAP
+import static com.henrysgrocery.item.Item.APPLE
+import static com.henrysgrocery.item.Item.BREAD
+import static com.henrysgrocery.item.Item.MILK
+import static com.henrysgrocery.item.Item.SOAP
 
 
 class ShoppingCartTest extends Specification {
@@ -34,7 +34,7 @@ class ShoppingCartTest extends Specification {
     def "addItem - should add a new item in cart and get added item"() {
 
         given:
-        ItemType item = MILK
+        Item item = MILK
 
         when:
         shoppingCart.addCart(item)
@@ -48,7 +48,7 @@ class ShoppingCartTest extends Specification {
     def "addItem - should add an existing item in cart and increase quantity of it "() {
 
         given:
-        ItemType item = MILK
+        Item item = MILK
         shoppingCart.addCart(item)
 
         when:
@@ -76,6 +76,29 @@ class ShoppingCartTest extends Specification {
         items.containsKey(BREAD)
         items.containsKey(SOAP)
         items.containsKey(APPLE)
+    }
+
+    def "getTotal - should get total of cost"() {
+
+        given: "a tin of soap, a loaf of bread, a bottle of milk and 2 apples"
+        shoppingCart.addCart(SOAP)
+        shoppingCart.addCart(BREAD)
+        shoppingCart.addCart(MILK)
+
+        when:
+        BigDecimal total = shoppingCart.getTotal()
+
+        then: "should get added items"
+        total == BigDecimal.valueOf(2.75)
+    }
+
+    def "getTotal - should return 0 when shopping cart is empty"() {
+
+        when:
+        BigDecimal total = shoppingCart.getTotal()
+
+        then: "should get added items"
+        total == BigDecimal.ZERO
     }
 
 
