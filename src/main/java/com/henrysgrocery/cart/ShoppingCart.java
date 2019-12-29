@@ -1,5 +1,6 @@
 package com.henrysgrocery.cart;
 
+import com.henrysgrocery.discount.ApplyDiscount;
 import com.henrysgrocery.discount.Discount;
 import com.henrysgrocery.item.Item;
 
@@ -11,12 +12,12 @@ import java.util.Map;
 public class ShoppingCart {
 
     private final Map<Item, Integer> items;
-    private final Discount discount;
+    private final ApplyDiscount applyDiscount;
     private final LocalDate purchaseDate;
 
-    public ShoppingCart(Discount discount, LocalDate purchaseDate) {
+    public ShoppingCart(LocalDate purchaseDate) {
         this.items = new EnumMap<>(Item.class);
-        this.discount = discount;
+        this.applyDiscount = new ApplyDiscount();
         this.purchaseDate = purchaseDate;
     }
 
@@ -52,7 +53,7 @@ public class ShoppingCart {
     private BigDecimal getItemCost(Map<Item, Integer> items, Map.Entry<Item, Integer> discountItem) {
         return discountItem.getKey().getCost()
                 .multiply(new BigDecimal(discountItem.getValue()))
-                .subtract(discount.getDiscount(items, discountItem, purchaseDate));
+                .subtract(applyDiscount.getDiscount(items, discountItem, purchaseDate));
     }
 
 

@@ -1,6 +1,5 @@
 package com.henrysgrocery.cart
 
-import com.henrysgrocery.discount.Discount
 import com.henrysgrocery.item.Item
 import spock.lang.Specification
 
@@ -14,7 +13,7 @@ class ShoppingCartTest extends Specification {
 
     def setup() {
         def purchaseDate = LocalDate.now().plusDays(3)
-        shoppingCart = new ShoppingCart(new Discount(), purchaseDate)
+        shoppingCart = new ShoppingCart(purchaseDate)
     }
 
     def "getItems - should not throw any exception and return empty map"() {
@@ -109,9 +108,9 @@ class ShoppingCartTest extends Specification {
 
         where:
         appleQuantity | expectedTotal
-                1     |     0.09        // 0.01 discount
-                2     |     0.18        // 0.02 discount
-                3     |     0.27        // 0.03 discount
+                1     |     0.09        // 0.01 applyDiscount
+                2     |     0.18        // 0.02 applyDiscount
+                3     |     0.27        // 0.03 applyDiscount
 
     }
 
@@ -128,11 +127,11 @@ class ShoppingCartTest extends Specification {
 
         where:
         soupQuantity    | breadQuantity | expectedTotal
-                4       |        1      |      3            // 0.40 discount
-                2       |        1      |      1.70         // 0.40 discount
-                1       |        1      |      1.45         // 0 discount
-                4       |        2      |      3.40         // 0.80 discount
-                8       |        1      |      5.6          // 0.40 discount
+                4       |        1      |      3            // 0.40 applyDiscount
+                2       |        1      |      1.70         // 0.40 applyDiscount
+                1       |        1      |      1.45         // 0 applyDiscount
+                4       |        2      |      3.40         // 0.80 applyDiscount
+                8       |        1      |      5.6          // 0.40 applyDiscount
     }
 
 
