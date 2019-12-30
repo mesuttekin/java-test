@@ -19,6 +19,10 @@ This is a simple exercise which is developed by Mesut Tekin.
         - In order to activate Apple discount please change purchaseDate in Application main method    
     - Add items into shopping cart with following insruction 
 
+## UML Diagram
+
+![alt text](doc/grocery-uml.png)
+
 ## Instructions
   1. Please fork this repository and work on your fork.
      _https://help.github.com/en/articles/fork-a-repo_
